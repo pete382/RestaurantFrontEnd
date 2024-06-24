@@ -1,0 +1,44 @@
+<h1>Restaurant Faves!</h1>
+
+<table>
+<tr>
+    <th>
+        Description
+    </th>
+    <th>
+        Restaurant
+    </th>
+    <th>
+        Rating
+    </th>
+    <th>
+        Order again ?
+    </th>
+    
+</tr>
+ 
+@for(o of allOrders; track $index){
+<tr>
+
+    <td>{{o.description}}</td>
+    <td>{{o.restaurant}}</td>
+    <td>{{o.rating}}</td>
+    <td>@if(orderAgain === true) { "✓"} </td>
+    <td><button  onclick="deleteOrder($event)" >delete</button></td>
+</tr>
+}
+
+</table>
+
+
+<h1>New Experience</h1>
+<app-form (SubmittedOrder)="addOrder($event)"></app-form>
+
+<h2>Filter Experiences</h2>
+<input type="text" [(ngModel)]="restaurantSearch" placeholder="Enter restaurant:" />
+<br />
+Undefined:<input type="radio" name="lent" [(ngModel)]="orderAgain" value="" />
+Lent Out:<input type="radio" name="lent" [(ngModel)]="orderAgain" value="true" />
+Available:<input type="radio" name="lent" [(ngModel)]="orderAgain" value="false" />
+<br />
+<button (click)="All()">Search Filtered</button>
